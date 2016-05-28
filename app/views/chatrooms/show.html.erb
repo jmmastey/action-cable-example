@@ -1,7 +1,7 @@
 <div class="row col-md-8 col-md-offset-2">
   <h1><%= @chatroom.topic %></h1>
 
-<div class="panel panel-default">
+<div class="panel panel-default" id="chat-pane">
   <% if @chatroom.messages.any? %>
     <div class="panel-body" id="messages">
       <%= render partial: 'messages/message', collection: @chatroom.messages%>
