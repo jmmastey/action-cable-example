@@ -1,1 +1,5 @@
-<p><strong><%=message.user.username%>:</strong> <%=message.content%></p>
+<% if message.message_type == "emote" %>
+  <p><i><%=message.user.username%> <%=message.content%></i></p>
+<% else %>
+  <p><strong><%=message.user.username%>:</strong> <%=message.content%></p>
+<% end %>

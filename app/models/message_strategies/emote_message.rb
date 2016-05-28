@@ -1,14 +1,15 @@
 module MessageStrategies
-  class BasicMessage
+  class EmoteMessage
     def self.match?(message)
-      true
+      message =~ /^\/me/
     end
 
     def self.handle(data)
-      message = Message.new(data.merge(message_type: "text"))
+      data[:content] = data[:content].sub(/^\/me\s+/, '')
+      message = Message.new(data.merge(message_type: "emote"))
 
       if message.save
-        ActionCable.server.broadcast 'messages',
+        ActionCable.server.broadcast 'emotes',
           message: message.content,
           user: message.user.username
       end
