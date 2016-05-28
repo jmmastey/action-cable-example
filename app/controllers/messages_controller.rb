@@ -1,12 +1,11 @@
 class MessagesController < ApplicationController
-  STRATEGIES = [ MessageStrategies::BasicMessage ]
-
   def create
     message_data = message_params.merge(user: current_user)
-    success = STRATEGIES
-              .first { |strategy| strategy.match? message_data[:content] }
-              .handle(message_data)
+    message_data[:content].strip!
 
+    success = MessageStrategies::STRATEGIES
+              .find { |strategy| strategy.match? message_data[:content] }
+              .handle(message_data)
 
     head :ok if success
   end

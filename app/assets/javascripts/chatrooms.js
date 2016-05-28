@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
   submitNewMessage();
+  ChatPane.scrollDown();
 });
 
 function submitNewMessage(){
